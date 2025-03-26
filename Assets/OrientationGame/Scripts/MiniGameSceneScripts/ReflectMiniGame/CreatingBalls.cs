@@ -100,10 +100,6 @@ public class CreatingBalls : MonoBehaviour
     // ボールのプレハブ
     [SerializeField] private GameObject ballPrefab;
     
-    
-    
-   
-    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -111,8 +107,6 @@ public class CreatingBalls : MonoBehaviour
         // 仮置きとしてプレイヤーネームリストにプレイヤー名を追加
         for (int i = 0; i < 6; i++)
         {
-            
-            
             playerRemainTimeList.Add(10.0f);
             
             //時間を表示
@@ -122,21 +116,13 @@ public class CreatingBalls : MonoBehaviour
             //プレイヤーの壁のコライダーを無効にする（すり抜ける状態）
             playerWallList[i].GetComponent<BoxCollider>().enabled = false;
 
-
-            
-            
             //プレイヤーネームリストを設定する（デバック用のため消してください。）
             playerNameList.Add("Player"+i.ToString());
             
             //仮設定、本番は消す
             playerColor.Add(new Color(0.2f * i, 0.5f, 1.0f, 1.0f)); // 適当な色を設定
-
-
-
             //プレイヤーネームリストにプレイヤー名を表示
             playerNameTextList[i].text = playerNameList[i];
-            
-            
             
             // マテリアルの初期設定
             Material mat = playerWallList[i].GetComponent<Renderer>().material;
@@ -209,58 +195,7 @@ public class CreatingBalls : MonoBehaviour
                 EndGame();
             }
         }
-
-        // このforeachからD,F,G,H,J,Kキーを押したらPlayer1,2....のようにそれぞれ対応したプレイヤーボールを跳ね返すようになる
-        /*foreach (var pair in keyMappings)
-        {
-            KeyCode key = pair.Key;
-            int keyNumber = pair.Value;
-
-            if (Input.GetKey(key))
-            {
-                // 残り時間がある場合
-                if (playerRemainTimeList[keyNumber] > 0)
-                {
-                    bool isBursted = false;
-                    // プレイヤーがすでにoutしているかどうか
-                    foreach (var player in playerRanking)
-                    {
-                        if(player-1 == pair.Value)isBursted = true;
-                    }
-                    
-                    playerWallList[keyNumber].GetComponent<BoxCollider>().enabled = true;
-                    if(isMiniGameStarted)playerRemainTimeList[keyNumber] -= Time.deltaTime;
-                    if(isBursted == false)playerRemainTimeTextList[keyNumber].text = playerRemainTimeList[keyNumber].ToString("F1");
-
-                    // 透明化解除（不透明にする）
-                    Color baseColor = playerWallMaterialList[keyNumber].GetColor("_BaseColor");
-                    baseColor.a = 1f;
-                    playerWallMaterialList[keyNumber].SetColor("_BaseColor", baseColor);
-                }
-                // 残り時間がない場合
-                else
-                {
-                    playerRemainTimeTextList[keyNumber].text = "0.0";
-                    playerRemainTimeTextList[keyNumber].color = new Color32(0x8b, 0x00, 0x00, 0xFF);
-                    playerWallList[keyNumber].GetComponent<BoxCollider>().enabled = false;
-
-                    // 不透明化（薄くする）
-                    Color baseColor = playerWallMaterialList[keyNumber].GetColor("_BaseColor");
-                    baseColor.a = 0.4f;
-                    playerWallMaterialList[keyNumber].SetColor("_BaseColor", baseColor);
-                }
-            }
-            // キーが押されていない場合
-            else
-            {
-                playerWallList[keyNumber].GetComponent<BoxCollider>().enabled = false;
-
-                // 不透明化（薄くする）
-                Color baseColor = playerWallMaterialList[keyNumber].GetColor("_BaseColor");
-                baseColor.a = 0.4f;
-                playerWallMaterialList[keyNumber].SetColor("_BaseColor", baseColor);
-            }
-        }*/
+        
        
     foreach (var pair in keyMappings)
     {
@@ -384,6 +319,7 @@ public class CreatingBalls : MonoBehaviour
         else playerRemainTimeTextList[outServerNumber].text = 7 - rank + "st";
     }
 
+    //ゲーム終了時に呼び出し
     private void EndGame()
     {
         if (isEnding == false)
@@ -447,8 +383,6 @@ public class CreatingBalls : MonoBehaviour
                 Color baseColor = playerWallMaterialList[i].GetColor("_BaseColor");
                 baseColor.a = 0.4f;
                 playerWallMaterialList[i].SetColor("_BaseColor", baseColor);
-
-                //playerWallMaterialList[i].renderQueue = (int)RenderQueue.;
                 playerWallMaterialList[i].SetFloat("_ZWrite", 1); // ZWriteを無効化（透過用）
                 playerWallMaterialList[i].SetFloat("_Surface", 0); // 0 = Opaque, 1 = Transparent
                 playerWallMaterialList[i].EnableKeyword("_SURFACE_TYPE_OPAQUE");
@@ -456,20 +390,9 @@ public class CreatingBalls : MonoBehaviour
                 // playerWallMaterialList[i].SetFloat("_Blend", 0); // 0 = Alpha, 1 = Premultiply, 2 = Additive, 3 = Multiply
             }
         }
-        
-        //ランキングの表示
-        //ランキング処理のUI
-
         //ランキングの表示、子供のテキストを取得
         rankingPanel.SetActive(true);
         StartCoroutine(TurnEnd());
-        
-        //ここでゲームを終わらせたい
-       // StartCoroutine(TurnEnd());
-        
-        //ゲーム終了の処理
-        
-        
     }
     IEnumerator TurnEnd()
     {
