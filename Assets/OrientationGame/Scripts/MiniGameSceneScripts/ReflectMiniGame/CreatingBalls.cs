@@ -392,21 +392,19 @@ public class CreatingBalls : MonoBehaviour
         }
         //ランキングの表示、子供のテキストを取得
         rankingPanel.SetActive(true);
-        StartCoroutine(TurnEnd());
+        StartCoroutine(MiniGameEnd());
     }
-    IEnumerator TurnEnd()
+    IEnumerator MiniGameEnd()
     {
         yield return new WaitForSeconds(2.5f);
         GameObject rankingText = rankingPanel.transform.GetChild(1).gameObject;
-        rankingText.GetComponent<Text>().text = "1st:" + playerNameList[playerRanking[0] - 1] + "\n" + "2nd:" +
+        rankingText.GetComponent<Text>().text = "1st:" + 
+                                                playerNameList[playerRanking[0] - 1] + "\n" + "2nd:" +
                                                 playerNameList[playerRanking[1] - 1] + "\n" + "3rd:" +
                                                 playerNameList[playerRanking[2] - 1] + "\n" + "4th:" +
                                                 playerNameList[playerRanking[3] - 1] + "\n" + "5th:" +
                                                 playerNameList[playerRanking[4] - 1] + "\n" + "6th:" +
                                                 playerNameList[playerRanking[5] - 1];
-        /*TurnProcessing turnProcessing = FindFirstObjectByType<TurnProcessing>();
-        turnProcessing.TurnOrder = playerRanking.ToList();
-        turnProcessing.EndMiniGame();*/
     }
 
     IEnumerator explainRules()

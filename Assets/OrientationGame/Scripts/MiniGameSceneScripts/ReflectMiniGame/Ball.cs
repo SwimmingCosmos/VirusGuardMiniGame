@@ -56,30 +56,6 @@ public class Ball : MonoBehaviour
                     // 速度を変更
                     myBallRigidbody.linearVelocity = direction * speed;
                     break;
-                
-                //使わないことにしました
-                case 2:
-                default:
-                    
-                    ContactPoint contact = collision.contacts[0];
-                    Vector3 normal = contact.normal;
-            
-                    // 反射ベクトルを計算
-                    Vector3 reflectDir = Vector3.Reflect(myBallRigidbody.linearVelocity.normalized, normal);
-            
-                    // 反射前の方向ベクトルを取得
-                    float currentAngle = Mathf.Atan2(reflectDir.y, reflectDir.x) * Mathf.Rad2Deg;
-            
-                    // ランダムな角度を現在の角度から±30度の範囲で変更
-                    float randomAngle = Random.Range(-30.0f, 30.0f);
-                    float newAngle = currentAngle + randomAngle;
-            
-                    // 新しい方向ベクトルを計算
-                    Vector3 newReflectDir = new Vector3(Mathf.Cos(newAngle * Mathf.Deg2Rad), Mathf.Sin(newAngle * Mathf.Deg2Rad), 0);
-            
-                    // 速度を維持して適用
-                    myBallRigidbody.linearVelocity = newReflectDir * myBallRigidbody.linearVelocity.magnitude;
-                    break;
 
             }
             

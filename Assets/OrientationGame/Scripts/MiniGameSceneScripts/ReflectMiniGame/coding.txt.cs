@@ -4,7 +4,7 @@
 　・メソッドの上になんのメソッドかのコメント書く
          
 　　例 // サイコロの値を返すメソッド
-private int Dice()
+　private int Dice()
 ・処理内にわかりづらい場所があればコメントを振る
 ・変数は基本privateでgetter、setterを作る
 ・インデントはタブで整える
