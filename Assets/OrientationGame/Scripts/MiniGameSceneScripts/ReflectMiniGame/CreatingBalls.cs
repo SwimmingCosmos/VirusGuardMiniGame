@@ -32,15 +32,15 @@ public class CreatingBalls : MonoBehaviour
     
     //各プレイヤーの色(color型)、すごろくから持ってくる
     private List<Color> playerColor = new List<Color>();
-    private List<Color> PlayerColor
+    public List<Color> PlayerColor
     {
         get { return playerColor; }
         set { playerColor = value; }
     }
     
     //各プレイヤーの順位(int型)
-    private List<int> playerRanking = new List<int>();
-    private List<int> PlayerRanking
+    private List<int> playerRanking = new List<int>();//メンバー変数
+    public List<int> PlayerRanking　//プロパティ
     {
         get { return playerRanking; }
         set { playerRanking = value; }
@@ -196,7 +196,6 @@ public class CreatingBalls : MonoBehaviour
             }
         }
         
-       
     foreach (var pair in keyMappings)
     {
         KeyCode key = pair.Key;
